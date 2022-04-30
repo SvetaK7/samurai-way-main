@@ -1,7 +1,12 @@
 .nav{
     grid-area: nav;
     background-color: rgb(221, 195, 245);
+    padding: 20px;
 }
-.item{
+.item a{
     color: rgb(22, 6, 16);
+    text-decoration: none;
+}
+.item a.activeLink{
+    color: gold;
 }
