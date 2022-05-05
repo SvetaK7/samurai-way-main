@@ -1,16 +1,14 @@
 import React from 'react';
 import s from './Post.module.css';
+import {PostType} from "../../Profile";
 
-type PostType = {
-    message: string
-    likeCount: number
-}
+
 const Post = (props: PostType) => {
     return (
         <div>
             <div className={s.item}>{props.message}</div>
             <div>
-                <span>{props.likeCount}Like</span>
+                <span>{props.likesCount}Like</span>
             </div>
         </div>
 
