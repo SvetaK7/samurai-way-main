@@ -8,5 +8,5 @@
     text-decoration: none;
 }
 .item a.activeLink{
-    color: gold;
+    font-weight: bolder;
 }

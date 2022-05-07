@@ -1,12 +1,14 @@
 .app-wrapper {
+    overflow-x: hidden;
     display: grid;
-    width: 1200px;
+    max-width: 1153px;
     margin: 0 auto;
     grid-template-areas:
   "header header"
-  "nav c";
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10 fr;
+  "nav c"
+  "sidebar c";
+    grid-template-rows: 60px 1fr 1fr;
+    grid-template-columns: 2fr 10fr;
 }
 
 .app-wrapper-content {

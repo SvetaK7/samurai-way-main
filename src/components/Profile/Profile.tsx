@@ -2,22 +2,14 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {TProfilePage} from "../../redux/state";
 
-export type PostType={
-    id?: number
-    message: string
-    likesCount: number
-}
-export type PostsType={
-    posts: Array<PostType>
-}
-
-const Profile = (props:PostsType) => {
+const Profile = (props:TProfilePage) => {
 
     return (
         <div>
             <ProfileInfo />
-            <MyPosts posts={props.posts}/>
+            <MyPosts profilePage={props.profilePage}/>
         </div>
     );
 }

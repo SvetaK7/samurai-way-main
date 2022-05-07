@@ -1,11 +1,11 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostsType} from "../Profile";
+import {TProfilePage} from "../../../redux/state";
 
-const MyPosts = (props: PostsType) => {
+const MyPosts = (props: TProfilePage) => {
 
-     let postsElements = props.posts.map( p => <Post message={p.message} likesCount={p.likesCount}/> )
+     let postsElements = props.profilePage.posts.map( p => <Post message={p.message} likesCount={p.likesCount} title={p.title}/>)
 
     return (
             <div className={s.postsBlock}>
@@ -18,7 +18,7 @@ const MyPosts = (props: PostsType) => {
                         <button>Add post</button>
                     </div>
                     <div className = {s.posts}>
-                        {postsElements}
+                      {postsElements}
                     </div>
                 </div>
 
