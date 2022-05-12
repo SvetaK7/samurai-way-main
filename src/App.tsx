@@ -14,22 +14,24 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 function App(props: AppStateType) {
 
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path={"/dialogs"} render={() => <Dialogs
-                        dialogsData={props.appState.dialogsPage.dialogsData}
-                        messagesData={props.appState.dialogsPage.messagesData}/>}/>
-                    <Route path={"/profile"} render={() => <Profile profilePage={props.appState.profilePage}/>}/>
-                    <Route path={"/news"} render={() => <News/>}/>
-                    <Route path={"/music"} render={() => <Music/>}/>
-                    <Route path={"/settings"} render={() => <Settings/>}/>
-                </div>
-                <Sidebar sidebar={props.appState.sidebar}/>
+
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Route path={"/dialogs"} render={() => <Dialogs
+                    dialogsData={props.appState.dialogsPage.dialogsData}
+                    messagesData={props.appState.dialogsPage.messagesData}/>}/>
+                <Route path={"/profile"} render={() => <Profile
+                    profilePage={props.appState.profilePage}
+                    addPost={props.addPost}
+                />}/>
+                <Route path={"/news"} render={() => <News/>}/>
+                <Route path={"/music"} render={() => <Music/>}/>
+                <Route path={"/settings"} render={() => <Settings/>}/>
             </div>
-        </BrowserRouter>
+            <Sidebar sidebar={props.appState.sidebar}/>
+        </div>
 
     );
 }

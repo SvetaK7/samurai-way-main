@@ -9,7 +9,7 @@ const Profile = (props:TProfilePage) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts profilePage={props.profilePage}/>
+            <MyPosts profilePage={props.profilePage} addPost={props.addPost}/>
         </div>
     );
 }

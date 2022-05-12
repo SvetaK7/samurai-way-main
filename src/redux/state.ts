@@ -32,7 +32,7 @@ export type DialogsPage = {
 
 export type PostType = {
     id?: number
-    message: string
+    message: string | undefined
     likesCount: number
     title: string
 }
@@ -43,6 +43,7 @@ export type PostsType = {
 
 export type TProfilePage = {
     profilePage: PostsType;
+    addPost : (postMessage: string | undefined) => void;
 }
 
 export type TDialogsPage = {
@@ -59,6 +60,7 @@ export type StateType = {
 
 export type AppStateType = {
     appState: StateType
+    addPost : (postMessage: string | undefined) => void
 }
 
 export const state: StateType = {
@@ -71,7 +73,7 @@ export const state: StateType = {
     },
     dialogsPage: {
         dialogsData: [
-            {id: 1, name: 'Dima'},
+            {id: 1, name: 'Dimych'},
             {id: 2, name: 'Sveta'},
             {id: 3, name: 'Artem'},
             {id: 4, name: 'Egor'},
@@ -96,4 +98,14 @@ export const state: StateType = {
         ]
     }
 
+}
+
+export let addPost = (postMessage: string | undefined) => {
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0,
+        title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
+    };
+    state.profilePage.posts.push(newPost);
 }
