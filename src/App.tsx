@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {AppStateType} from "./redux/state";
+import {addMessage, AppStateType, updateNewMessageText} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
 function App(props: AppStateType) {
@@ -20,11 +20,16 @@ function App(props: AppStateType) {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path={"/dialogs"} render={() => <Dialogs
-                    dialogsData={props.appState.dialogsPage.dialogsData}
-                    messagesData={props.appState.dialogsPage.messagesData}/>}/>
+                    dialogsPage={props.appState.dialogsPage}
+                    addMessage={props.addMessage}
+                    updateNewMessageText={props.updateNewMessageText}
+                    // messagesData={props.appState.dialogsPage.messagesData}
+                    // addMessage={props.addMessage}
+                />}/>
                 <Route path={"/profile"} render={() => <Profile
                     profilePage={props.appState.profilePage}
                     addPost={props.addPost}
+                    updateNewPostText={props.updateNewPostText}
                 />}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>

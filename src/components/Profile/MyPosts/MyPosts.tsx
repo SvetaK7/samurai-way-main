@@ -8,21 +8,26 @@ const MyPosts = (props: TProfilePage) => {
     let postsElements = props.profilePage.posts.map(p => <Post message={p.message} likesCount={p.likesCount}
                                                                title={p.title}/>)
 
-    let newPostElement : RefObject<HTMLTextAreaElement> = React.createRef();
+    let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
     const addPost = () => {
-        let text = newPostElement.current?.value;
-        props.addPost(text);
-        if (newPostElement.current?.value != undefined){
-            newPostElement.current.value = '';
-        }
+        props.addPost();
+        // if (newPostElement.current?.value != undefined) {
+        //     newPostElement.current.value = '';
+        // }
+        // props.updateNewPostText('');
     }
+    const onPostChange = () => {
+        let text = newPostElement.current?.value;
+        props.updateNewPostText(text);
+    }
+
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={onPostChange}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

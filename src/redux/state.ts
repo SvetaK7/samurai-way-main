@@ -15,6 +15,7 @@ export type FriendType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
+    newPostText: string | undefined
 }
 
 export type DialogItemType = {
@@ -24,12 +25,13 @@ export type DialogItemType = {
 
 export type MessagePropsType = {
     id?: number
-    message: string
+    message: string | undefined
 }
 
 export type DialogsPage = {
     dialogsData: Array<DialogItemType>
     messagesData: Array<MessagePropsType>
+    newMessageText: string | undefined;
 }
 
 export type PostType = {
@@ -41,15 +43,19 @@ export type PostType = {
 
 export type PostsType = {
     posts: Array<PostType>
+    newPostText: string | undefined
 }
 
 export type TProfilePage = {
-    profilePage: PostsType;
-    addPost : (postMessage: string | undefined) => void;
+    profilePage: PostsType
+    addPost : () => void
+    updateNewPostText: (newText: string | undefined) => void
 }
 
 export type TDialogsPage = {
-    dialogsPage: DialogsPage;
+    dialogsPage: DialogsPage
+    addMessage: () => void
+    updateNewMessageText: (newMessage: string | undefined) => void
 }
 
 /*export type TState = TProfilePage & TDialogsPage & TSydebar;*/
@@ -62,7 +68,10 @@ export type StateType = {
 
 export type AppStateType = {
     appState: StateType
-    addPost : (postMessage: string | undefined) => void
+    addPost : () => void
+    updateNewPostText: (newText: string | undefined) => void
+    addMessage: () => void
+    updateNewMessageText: (newMessage: string | undefined) => void
 }
 
 export const state: StateType = {
@@ -71,7 +80,8 @@ export const state: StateType = {
             {id: 1, message: 'Hi, how are you', likesCount: 12, title: "https://bipbap.ru/wp-content/uploads/2020/11/kartinki-koshek_30.jpg"},
             {id: 2, message: 'It is my first post', likesCount: 11, title: "https://printovo.ru/10735-large_default/kot-sajmona.jpg"},
             {id: 3, message: 'It is my second post', likesCount: 11, title: "https://images.ua.prom.st/441474411_w640_h640_vinilovaya-naklejka-sajmon.jpg"}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogsData: [
@@ -90,7 +100,8 @@ export const state: StateType = {
             {id: 4, message: 'I am happy'},
             {id: 5, message: 'You are welcome'},
             {id: 6, message: 'I am cooking pizza today'}
-        ]
+        ],
+        newMessageText: ''
     },
     sidebar:{
         friends: [
@@ -101,14 +112,35 @@ export const state: StateType = {
     }
 
 }
-
-export let addPost = (postMessage: string | undefined) => {
-    let newPost = {
+// window.state = state;
+export const addPost = () => {
+    const newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0,
         title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
     };
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    renderEntireTree(state);
+}
+
+export const updateNewPostText = (newText: string | undefined) => {
+    state.profilePage.newPostText = newText;
+    renderEntireTree(state);
+}
+//для станицы диалогов
+export const addMessage = () => {
+    const newMessage = {
+        id: 7,
+        message: state.dialogsPage.newMessageText
+    }
+    state.dialogsPage.messagesData.push(newMessage);
+    state.dialogsPage.newMessageText = '';
+    renderEntireTree(state);
+}
+
+export const updateNewMessageText = (newMessage: string | undefined) => {
+    state.dialogsPage.newMessageText = newMessage;
     renderEntireTree(state);
 }
