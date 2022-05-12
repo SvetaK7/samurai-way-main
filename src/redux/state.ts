@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../render";
+
 export type TSydebar = {
     sidebar: FriendsType
 }
@@ -108,4 +110,5 @@ export let addPost = (postMessage: string | undefined) => {
         title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
     };
     state.profilePage.posts.push(newPost);
+    renderEntireTree(state);
 }

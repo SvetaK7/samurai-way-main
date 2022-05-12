@@ -12,6 +12,9 @@ const MyPosts = (props: TProfilePage) => {
     const addPost = () => {
         let text = newPostElement.current?.value;
         props.addPost(text);
+        if (newPostElement.current?.value != undefined){
+            newPostElement.current.value = '';
+        }
     }
 
     return (
