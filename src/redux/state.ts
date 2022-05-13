@@ -1,4 +1,6 @@
-import {renderEntireTree} from "../render";
+let renderEntireTree = (state: StateType) => {
+    console.log('State changed');
+}
 
 export type TSydebar = {
     sidebar: FriendsType
@@ -143,4 +145,9 @@ export const addMessage = () => {
 export const updateNewMessageText = (newMessage: string | undefined) => {
     state.dialogsPage.newMessageText = newMessage;
     renderEntireTree(state);
+}
+
+export const subscribe = (observer: (state: StateType)=> void) => {
+    renderEntireTree= observer;
+
 }
