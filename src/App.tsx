@@ -8,11 +8,15 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {addMessage, AppStateType, updateNewMessageText} from "./redux/state";
+import {AppStateType, store, StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
-function App(props: AppStateType) {
+type AppStoreType = {
+    store:StoreType
+}
 
+function App(props: AppStoreType) {
+const state = props.store.getState();
     return (
 
         <div className='app-wrapper'>
@@ -20,22 +24,22 @@ function App(props: AppStateType) {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path={"/dialogs"} render={() => <Dialogs
-                    dialogsPage={props.appState.dialogsPage}
-                    addMessage={props.addMessage}
-                    updateNewMessageText={props.updateNewMessageText}
+                    dialogsPage={state.dialogsPage}
+                    addMessage={props.store.addMessage.bind(store)}
+                    updateNewMessageText={props.store.updateNewMessageText.bind(store)}
                     // messagesData={props.appState.dialogsPage.messagesData}
                     // addMessage={props.addMessage}
                 />}/>
                 <Route path={"/profile"} render={() => <Profile
-                    profilePage={props.appState.profilePage}
-                    addPost={props.addPost}
-                    updateNewPostText={props.updateNewPostText}
+                    profilePage={state.profilePage}
+                    addPost={props.store.addPost.bind(store)}
+                    updateNewPostText={props.store.updateNewPostText.bind(store)}
                 />}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
                 <Route path={"/settings"} render={() => <Settings/>}/>
             </div>
-            <Sidebar sidebar={props.appState.sidebar}/>
+            <Sidebar sidebar={state.sidebar}/>
         </div>
 
     );
