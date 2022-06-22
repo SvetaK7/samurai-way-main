@@ -10,7 +10,8 @@ const MyPosts = (props: TProfilePage) => {
 
     let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
     const addPost = () => {
-        props.addPost();
+        // props.addPost();
+        props.dispatch({type: 'ADD-POST'});
         // if (newPostElement.current?.value != undefined) {
         //     newPostElement.current.value = '';
         // }
@@ -18,7 +19,9 @@ const MyPosts = (props: TProfilePage) => {
     }
     const onPostChange = () => {
         let text = newPostElement.current?.value;
-        props.updateNewPostText(text);
+        // props.updateNewPostText(text);
+        const action = {type: 'UPDATE-NEW-POST-TEXT', newText: text}
+        props.dispatch(action);
     }
 
 

@@ -12,12 +12,16 @@ const Dialogs = (props: TDialogsPage) => {
     let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addMessage = () => {
-        props.addMessage();
+        // props.addMessage();
+        props.dispatch({type:'ADD-MESSAGE'});
     }
 
     const onMessageChange = () => {
         let text = newMessageElement.current?.value;
-        props.updateNewMessageText(text);
+        console.log(text);
+        // props.updateNewMessageText(text);
+        const action = {type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: text }
+        props.dispatch(action);
     }
 
     return (

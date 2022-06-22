@@ -48,14 +48,16 @@ export type PostsType = {
 
 export type TProfilePage = {
     profilePage: PostsType
-    addPost : () => void
-    updateNewPostText: (newText: string | undefined) => void
+    // addPost : () => void
+    // updateNewPostText: (newText: string | undefined) => void
+    dispatch: (action: any) => void
 }
 
 export type TDialogsPage = {
     dialogsPage: DialogsPage
-    addMessage: () => void
-    updateNewMessageText: (newMessage: string | undefined) => void
+    // addMessage: () => void
+    // updateNewMessageText: (newMessage: string | undefined) => void
+    dispatch: (action: any) => void
 }
 
 /*export type TState = TProfilePage & TDialogsPage & TSydebar;*/
@@ -78,12 +80,27 @@ export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
-    addPost: () => void
-    updateNewPostText: (newText: string | undefined) => void
-    addMessage: () => void
-    updateNewMessageText : (newMessage: string | undefined) => void
+    // addPost: () => void
+    // updateNewPostText: (newText: string | undefined) => void
+    // addMessage: () => void
+    // updateNewMessageText : (newMessage: string | undefined) => void
     subscribe: (observer: ()=> void) => void
+    dispatch: (action: any) => void
+}
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+}
+type UpdateNewMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessage: string
 }
 
 
@@ -127,44 +144,74 @@ export const store : StoreType = {
         }
 
     },
-    getState (){
-        return this._state;
-    },
     _callSubscriber (){
         console.log('State changed');
     },
-    addPost () {
-        const newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-            title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber();
-    },
-    updateNewPostText (newText: string | undefined) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber();
-    },
-    addMessage () {
-        const newMessage = {
-            id: 7,
-            message: this._state.dialogsPage.newMessageText
-        }
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber();
-    }, //для страницы диалогов
-    updateNewMessageText (newMessage: string | undefined) {
-        this._state.dialogsPage.newMessageText = newMessage;
-        this._callSubscriber();
+
+    getState (){
+        return this._state;
     },
     subscribe (observer) {
         this._callSubscriber = observer;
 
-    }
+    },
+
+    dispatch(action){
+        if (action.type === 'ADD-POST'){
+            const newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+                title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber();
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber();
+        } else if (action.type === 'ADD-MESSAGE'){
+            const newMessage = {
+                id: 7,
+                message: this._state.dialogsPage.newMessageText
+            }
+            this._state.dialogsPage.messagesData.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber();
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT'){
+            this._state.dialogsPage.newMessageText = action.newMessage;
+            this._callSubscriber();
+        }
+    },
+    // addPost () {
+    //     const newPost = {
+    //         id: 5,
+    //         message: this._state.profilePage.newPostText,
+    //         likesCount: 0,
+    //         title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
+    //     };
+    //     this._state.profilePage.posts.push(newPost);
+    //     this._state.profilePage.newPostText = '';
+    //     this._callSubscriber();
+    // },
+    // updateNewPostText (newText: string | undefined) {
+    //     this._state.profilePage.newPostText = newText;
+    //     this._callSubscriber();
+    // },
+    // addMessage () {
+    //     const newMessage = {
+    //         id: 7,
+    //         message: this._state.dialogsPage.newMessageText
+    //     }
+    //     this._state.dialogsPage.messagesData.push(newMessage);
+    //     this._state.dialogsPage.newMessageText = '';
+    //     this._callSubscriber();
+    // }, //для страницы диалогов
+    // updateNewMessageText (newMessage: string | undefined) {
+    //     this._state.dialogsPage.newMessageText = newMessage;
+    //     this._callSubscriber();
+    // },
+
 
 }
 

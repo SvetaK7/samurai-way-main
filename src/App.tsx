@@ -11,7 +11,7 @@ import Settings from "./components/Settings/Settings";
 import {AppStateType, store, StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 
-type AppStoreType = {
+export type AppStoreType = {
     store:StoreType
 }
 
@@ -25,15 +25,18 @@ const state = props.store.getState();
             <div className='app-wrapper-content'>
                 <Route path={"/dialogs"} render={() => <Dialogs
                     dialogsPage={state.dialogsPage}
-                    addMessage={props.store.addMessage.bind(store)}
-                    updateNewMessageText={props.store.updateNewMessageText.bind(store)}
+                    // addMessage={props.store.addMessage.bind(store)}
+                    dispatch={props.store.dispatch.bind(props.store)}
+                    // updateNewMessageText={props.store.updateNewMessageText.bind(store)}
+
                     // messagesData={props.appState.dialogsPage.messagesData}
                     // addMessage={props.addMessage}
                 />}/>
                 <Route path={"/profile"} render={() => <Profile
                     profilePage={state.profilePage}
-                    addPost={props.store.addPost.bind(store)}
-                    updateNewPostText={props.store.updateNewPostText.bind(store)}
+                    // addPost={props.store.addPost.bind(store)}
+                    dispatch={props.store.dispatch.bind(props.store)}
+                    // updateNewPostText={props.store.updateNewPostText.bind(store)}
                 />}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
