@@ -1,4 +1,7 @@
-
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 export type TSydebar = {
     sidebar: FriendsType
@@ -71,9 +74,9 @@ export type StateType = {
 export type AppStateType = {
     appState: StateType
     addPost : () => void
-    updateNewPostText: (newText: string | undefined) => void
+    // updateNewPostText: (newText: string | undefined) => void
     addMessage: () => void
-    updateNewMessageText: (newMessage: string | undefined) => void
+    // updateNewMessageText: (newMessage: string | undefined) => void
 }
 
 export type StoreType = {
@@ -85,7 +88,7 @@ export type StoreType = {
     // addMessage: () => void
     // updateNewMessageText : (newMessage: string | undefined) => void
     subscribe: (observer: ()=> void) => void
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 type AddPostActionType = {
@@ -102,6 +105,7 @@ type UpdateNewMessageTextActionType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessage: string
 }
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType
 
 
 
@@ -156,8 +160,8 @@ export const store : StoreType = {
 
     },
 
-    dispatch(action){
-        if (action.type === 'ADD-POST'){
+    dispatch(action: ActionsTypes){
+        if (action.type === ADD_POST){
             const newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -167,10 +171,10 @@ export const store : StoreType = {
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        } else if (action.type === UPDATE_NEW_POST_TEXT){
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber();
-        } else if (action.type === 'ADD-MESSAGE'){
+        } else if (action.type === ADD_MESSAGE){
             const newMessage = {
                 id: 7,
                 message: this._state.dialogsPage.newMessageText
@@ -178,7 +182,7 @@ export const store : StoreType = {
             this._state.dialogsPage.messagesData.push(newMessage);
             this._state.dialogsPage.newMessageText = '';
             this._callSubscriber();
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT'){
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT){
             this._state.dialogsPage.newMessageText = action.newMessage;
             this._callSubscriber();
         }
@@ -215,5 +219,20 @@ export const store : StoreType = {
 
 }
 
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+export const updateNewPostTextActionCreator = (text: string | undefined) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT, newText: text
+    }
+}
+
+export const AddMessageActionCreator = () => ({ type: ADD_MESSAGE })
+
+export const UpdateNewMessageText = (text: string | undefined) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text
+    }
+}
 // window.store = store;
 

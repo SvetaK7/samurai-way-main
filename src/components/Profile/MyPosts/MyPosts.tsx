@@ -1,7 +1,8 @@
 import React, {RefObject} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {TProfilePage} from "../../../redux/state";
+import {addPostActionCreator, TProfilePage, updateNewPostTextActionCreator} from "../../../redux/state";
+
 
 const MyPosts = (props: TProfilePage) => {
 
@@ -11,7 +12,7 @@ const MyPosts = (props: TProfilePage) => {
     let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
     const addPost = () => {
         // props.addPost();
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostActionCreator());
         // if (newPostElement.current?.value != undefined) {
         //     newPostElement.current.value = '';
         // }
@@ -20,7 +21,7 @@ const MyPosts = (props: TProfilePage) => {
     const onPostChange = () => {
         let text = newPostElement.current?.value;
         // props.updateNewPostText(text);
-        const action = {type: 'UPDATE-NEW-POST-TEXT', newText: text}
+        const action = updateNewPostTextActionCreator(text)
         props.dispatch(action);
     }
 
