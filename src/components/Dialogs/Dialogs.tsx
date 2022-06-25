@@ -2,7 +2,8 @@ import React, {ChangeEvent, RefObject} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {AddMessageActionCreator, DialogsPage, TDialogsPage, UpdateNewMessageText} from "../../redux/state";
+import { TDialogsPage} from "../../redux/state";
+import {AddMessageActionCreator, UpdateNewMessageText} from "../../redux/dialogs-reducer";
 
 
 const Dialogs = (props: TDialogsPage) => {

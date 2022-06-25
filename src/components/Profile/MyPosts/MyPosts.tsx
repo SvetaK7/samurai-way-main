@@ -1,7 +1,8 @@
 import React, {RefObject} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, TProfilePage, updateNewPostTextActionCreator} from "../../../redux/state";
+import {TProfilePage} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 
 const MyPosts = (props: TProfilePage) => {
