@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react';
+import React, {ChangeEvent, RefObject} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -10,16 +10,15 @@ const Dialogs = (props: TDialogsPage) => {
     let dialogsElement = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
     let messagesElements = props.dialogsPage.messagesData.map(m => <Message message={m.message}/>)
 
-    let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef();
+    // let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
     const addMessage = () => {
         // props.addMessage();
         props.dispatch(AddMessageActionCreator());
     }
 
-    const onMessageChange = () => {
-        let text = newMessageElement.current?.value;
-        console.log(text);
+    const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.target.value;
         // props.updateNewMessageText(text);
         const action = UpdateNewMessageText(text)
         props.dispatch(action);
@@ -31,7 +30,7 @@ const Dialogs = (props: TDialogsPage) => {
                 {dialogsElement}
             </div>
             <div className={s.messages}>
-                <textarea ref={newMessageElement}
+                <textarea
                           onChange={onMessageChange}
                           value={props.dialogsPage.newMessageText}></textarea>
                 <div>
