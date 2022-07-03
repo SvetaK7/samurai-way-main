@@ -113,7 +113,7 @@ export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | Add
 
 
 
-export const store : StoreType = {
+/*export const store : StoreType = {
     _state : {
         profilePage: {
             posts: [
@@ -171,6 +171,8 @@ export const store : StoreType = {
 
         this._callSubscriber();
     },
+
+
     // addPost () {
     //     const newPost = {
     //         id: 5,
@@ -201,6 +203,6 @@ export const store : StoreType = {
     // },
 
 }
-
+*/
 // window.store = store;
 
