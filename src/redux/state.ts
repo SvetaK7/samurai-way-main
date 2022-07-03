@@ -92,7 +92,7 @@ export type StoreType = {
     // addMessage: () => void
     // updateNewMessageText : (newMessage: string | undefined) => void
     subscribe: (observer: ()=> void) => void
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: { type: string }) => void
 }
 
 type AddPostActionType = {
@@ -109,7 +109,7 @@ type UpdateNewMessageTextActionType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessage: string
 }
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType;
 
 
 

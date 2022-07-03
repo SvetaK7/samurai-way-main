@@ -10,6 +10,8 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
+import {store} from "./redux/redux-store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 export type AppStoreType = {
     store:StoreType
@@ -22,20 +24,17 @@ const state = props.store.getState();
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path={"/dialogs"} render={() => <Dialogs
-                    dialogsPage={state.dialogsPage}
-                    // addMessage={props.store.addMessage.bind(store)}
-                    dispatch={props.store.dispatch.bind(props.store)}
-                    // updateNewMessageText={props.store.updateNewMessageText.bind(store)}
+                <Route path={"/dialogs"} render={() => <DialogsContainer
+                    store={props.store}
+                    // dialogsPage={state.dialogsPage}
+                    // dispatch={props.store.dispatch.bind(props.store)}
 
-                    // messagesData={props.appState.dialogsPage.messagesData}
-                    // addMessage={props.addMessage}
                 />}/>
                 <Route path={"/profile"} render={() => <Profile
-                    profilePage={state.profilePage}
-                    // addPost={props.store.addPost.bind(store)}
-                    dispatch={props.store.dispatch.bind(props.store)}
-                    // updateNewPostText={props.store.updateNewPostText.bind(store)}
+                    store={props.store}
+                    // profilePage={state.profilePage}
+                    // dispatch={props.store.dispatch.bind(props.store)}
+
                 />}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
