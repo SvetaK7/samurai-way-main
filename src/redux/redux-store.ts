@@ -9,4 +9,6 @@ const reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 })
-export const store: StoreType = createStore(reducers);
+
+export type AppStateType2 = ReturnType<typeof reducers>
+export const store = createStore(reducers);

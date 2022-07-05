@@ -3,10 +3,9 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPage, TDialogsPage} from "../../redux/state";
-import {AddMessageActionCreator, UpdateNewMessageText} from "../../redux/dialogs-reducer";
 
 type DialogsNewType = {
-    UpdateNewMessageText: (text: string) => void
+    updateNewMessageText: (text: string) => void
     addMessage: () => void
     dialogsPage: DialogsPage;
 }
@@ -24,7 +23,7 @@ const Dialogs = (props: DialogsNewType) => {
 
     const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.target.value;
-        props.UpdateNewMessageText(text)
+        props.updateNewMessageText(text);
     }
 
     return (

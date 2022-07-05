@@ -13,34 +13,20 @@ import {Sidebar} from "./components/Sidebar/Sidebar";
 import {store} from "./redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-export type AppStoreType = {
-    store:StoreType
-}
 
-function App(props: AppStoreType) {
-const state = props.store.getState();
+function App() {
     return (
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path={"/dialogs"} render={() => <DialogsContainer
-                    store={props.store}
-                    // dialogsPage={state.dialogsPage}
-                    // dispatch={props.store.dispatch.bind(props.store)}
-
-                />}/>
-                <Route path={"/profile"} render={() => <Profile
-                    store={props.store}
-                    // profilePage={state.profilePage}
-                    // dispatch={props.store.dispatch.bind(props.store)}
-
-                />}/>
+                <Route path={"/dialogs"} render={() => <DialogsContainer/>}/>
+                <Route path={"/profile"} render={() => <Profile/>}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
                 <Route path={"/settings"} render={() => <Settings/>}/>
             </div>
-            <Sidebar sidebar={state.sidebar}/>
+            {/*<Sidebar sidebar={state.sidebar}/>*/}
         </div>
 
     );
