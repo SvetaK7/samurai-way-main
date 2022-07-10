@@ -12,8 +12,8 @@ type DialogsNewType = {
 
 const Dialogs = (props: DialogsNewType) => {
     const state = props.dialogsPage
-    let dialogsElement = state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
-    let messagesElements = state.messagesData.map(m => <Message message={m.message}/>)
+    let dialogsElement = state.dialogsData.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id}/>);
+    let messagesElements = state.messagesData.map(m => <Message key={m.id} message={m.message}/>)
 
     // let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
