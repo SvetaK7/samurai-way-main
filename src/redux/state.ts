@@ -94,6 +94,18 @@ export type StoreType = {
     subscribe: (observer: ()=> void) => void
     dispatch: (action: { type: string }) => void
 }
+export type LocationUserType = {
+    city: string
+    country: string
+}
+export type UserType = {
+    id: number
+    photoUrl: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: LocationUserType
+}
 
 type AddPostActionType = {
     type: 'ADD-POST'
@@ -109,7 +121,19 @@ type UpdateNewMessageTextActionType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessage: string
 }
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType;
+type FollowACType = {
+    type: 'FOLLOW',
+    userID: number
+}
+type UnFollowACType = {
+    type: 'UNFOLLOW',
+    userID: number
+}
+type SetUsersACType = {
+    type: 'SET_USERS',
+    users: Array<UserType>
+}
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType;
 
 
 

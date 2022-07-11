@@ -12,6 +12,7 @@ import { StoreType} from "./redux/state";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {store} from "./redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <div className='app-wrapper-content'>
                 <Route path={"/dialogs"} render={() => <DialogsContainer/>}/>
                 <Route path={"/profile"} render={() => <Profile/>}/>
+                <Route path={"/users"} render={() => <UsersContainer/>}/>
                 <Route path={"/news"} render={() => <News/>}/>
                 <Route path={"/music"} render={() => <Music/>}/>
                 <Route path={"/settings"} render={() => <Settings/>}/>
