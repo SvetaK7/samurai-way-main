@@ -137,7 +137,16 @@ type SetUsersACType = {
     type: 'SET_USERS',
     users: Array<UserType>
 }
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType;
+type SetCurrentPageACType = {
+    type: 'SET_CURRENT_PAGE',
+    currentPage: number
+}
+type SetTotalUsersCountAC = {
+    type: 'SET_TOTAL_USERS_COUNT',
+    totalUsersCount: number
+}
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
+    | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType| SetCurrentPageACType | SetTotalUsersCountAC;
 
 
 

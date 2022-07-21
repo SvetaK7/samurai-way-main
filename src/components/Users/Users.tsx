@@ -15,13 +15,44 @@ type UsersType = {
 export class Users extends React.Component<any, any> {
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+        });
+    }
+
+    onPageChanged(pageNumber: number) {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
         });
     }
 
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+        let newPages;
+        if (this.props.currentPage <= 5) {
+            newPages = pages.slice(0,10)
+        } else {
+            newPages=pages.slice(this.props.currentPage - 5,this.props.currentPage + 5)
+        }
+
         return <div>
+            <div>
+                {newPages.map((p, index) => {
+                    return <span key={index}
+                        className={this.props.currentPage === p ? s.selectedPage : ''}
+                        onClick={(e) => {
+                            this.onPageChanged(p)
+                        }}
+                    >{p} </span>
+                })}
+            </div>
             {
                 this.props.users.map((u: UserType) => <div key={u.id}>
                 <span>
