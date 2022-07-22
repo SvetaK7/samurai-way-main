@@ -1,6 +1,7 @@
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
+import {toggleIsFetchingAC} from "./users-reducer";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -141,12 +142,17 @@ type SetCurrentPageACType = {
     type: 'SET_CURRENT_PAGE',
     currentPage: number
 }
-type SetTotalUsersCountAC = {
+type SetTotalUsersCountACType = {
     type: 'SET_TOTAL_USERS_COUNT',
     totalUsersCount: number
 }
+type ToggleIsFetchingACType = {
+    type: 'TOGGLE_IS_FETCHING',
+    isFetching: boolean
+}
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
-    | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType| SetCurrentPageACType | SetTotalUsersCountAC;
+    | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
+    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType;
 
 
 
