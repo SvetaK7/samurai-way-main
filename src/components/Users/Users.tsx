@@ -1,60 +1,47 @@
-import React from 'react';
-import {InitialStateType} from "../../redux/users-reducer";
-import s from './Users.module.css'
+import React from 'react'
+import s from "./Users.module.css";
 import {UserType} from "../../redux/state";
-import axios from "axios";
-import userPhoto from '../../assets/img/profile.png'
+import userPhoto from "../../assets/img/profile.png";
+
 
 type UsersType = {
     users: Array<UserType>
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
+    // setUsers: (users: Array<UserType>) => void
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    onPageChanged:(pageNumber: number) => void
 }
 
-export class Users extends React.Component<any, any> {
+export const Users = (props: UsersType) => {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        });
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
+    }
+    let newPages;
+    if (props.currentPage <= 5) {
+        newPages = pages.slice(0,10)
+    } else {
+        newPages=pages.slice(props.currentPage - 5, props.currentPage + 5)
     }
 
-    onPageChanged(pageNumber: number) {
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
-        });
-    }
-
-    render() {
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-        let newPages;
-        if (this.props.currentPage <= 5) {
-            newPages = pages.slice(0,10)
-        } else {
-            newPages=pages.slice(this.props.currentPage - 5,this.props.currentPage + 5)
-        }
-
-        return <div>
-            <div>
-                {newPages.map((p, index) => {
-                    return <span key={index}
-                        className={this.props.currentPage === p ? s.selectedPage : ''}
-                        onClick={(e) => {
-                            this.onPageChanged(p)
-                        }}
-                    >{p} </span>
-                })}
-            </div>
-            {
-                this.props.users.map((u: UserType) => <div key={u.id}>
+    return <div>
+        <div>
+            {newPages.map((p, index) => {
+                return <span key={index}
+                             className={props.currentPage === p ? s.selectedPage : ''}
+                             onClick={(e) => {
+                                 props.onPageChanged(p)
+                             }}
+                >{p} </span>
+            })}
+        </div>
+        {
+            props.users.map((u: UserType) => <div key={u.id}>
                 <span>
                     <div>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.photo}/>
@@ -62,14 +49,14 @@ export class Users extends React.Component<any, any> {
                     <div>
                         {u.followed
                             ? <button onClick={() => {
-                                this.props.unfollow(u.id)
+                                props.unfollow(u.id)
                             }}>Unfollow</button>
                             : <button onClick={() => {
-                                this.props.follow(u.id)
+                                props.follow(u.id)
                             }}>Follow</button>}
                     </div>
                 </span>
-                    <span>
+                <span>
                     <span>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
@@ -79,8 +66,7 @@ export class Users extends React.Component<any, any> {
                         <div>{"u.location.city"}</div>
                     </span>
                 </span>
-                </div>)
-            }
-        </div>
-    }
+            </div>)
+        }
+    </div>
 }
