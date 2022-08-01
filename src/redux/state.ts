@@ -2,6 +2,7 @@ import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {sidebarReducer} from "./sidebar-reducer";
 import {toggleIsFetching} from "./users-reducer";
+import {store} from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -150,9 +151,13 @@ type ToggleIsFetchingACType = {
     type: 'TOGGLE_IS_FETCHING',
     isFetching: boolean
 }
+type setUserProfile = {
+    type: 'SET_USER_PROFILE'
+    profile: any
+}
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
-    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType;
+    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | setUserProfile;
 
 
 

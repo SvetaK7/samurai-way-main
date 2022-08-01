@@ -12,7 +12,6 @@ import {
 import {UserType} from "../../redux/state";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from './../../assets/img/preloader.svg'
 import {Preloader} from "../common/Preloader/Preloader";
 
 export class UsersContainer extends React.Component<any, any> {
