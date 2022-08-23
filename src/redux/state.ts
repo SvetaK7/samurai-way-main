@@ -155,9 +155,19 @@ type setUserProfile = {
     type: 'SET_USER_PROFILE'
     profile: any
 }
+type setUserData = {
+    type: 'SET_USER_DATA'
+    payload: {
+        id: number
+        email: string
+        login: string
+        isAuth: boolean
+    }
+
+}
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
-    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | setUserProfile;
+    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | setUserProfile | setUserData;
 
 
 
