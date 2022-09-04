@@ -151,6 +151,11 @@ type ToggleIsFetchingACType = {
     type: 'TOGGLE_IS_FETCHING',
     isFetching: boolean
 }
+type ToggleFollowingProgressACType = {
+    type: 'TOGGLE_IS_FOLLOWING_PROGRESS',
+    isFetching: boolean,
+    userId: number
+}
 type setUserProfile = {
     type: 'SET_USER_PROFILE'
     profile: any
@@ -167,7 +172,8 @@ type setUserData = {
 }
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
-    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | setUserProfile | setUserData;
+    | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
+    | setUserProfile | setUserData;
 
 
 
