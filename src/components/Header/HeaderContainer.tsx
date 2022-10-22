@@ -3,8 +3,8 @@ import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType2} from "../../redux/redux-store";
-import {setAuthUserData} from "../../redux/auth-reducer";
-import {usersAPI} from "../../api/api";
+import {getAuthUserDataThunk, setAuthUserData} from "../../redux/auth-reducer";
+import {authAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component <any,any>{
 
@@ -17,12 +17,20 @@ class HeaderContainer extends React.Component <any,any>{
         //         this.props.setAuthUserData( id, email, login);
         //     }
         // });
-        usersAPI.getLoginUsers().then(data => {
-            if (data.resultCode === 0){
-                        let {id, email, login} = data.data;
-                        this.props.setAuthUserData( id, email, login);
-                    }
-        })
+
+        // authAPI.getLoginUsers().then(data => {
+        //     if (data.resultCode === 0){
+        //                 let {id, email, login} = data.data;
+        //                 this.props.setAuthUserData( id, email, login);
+        //             }
+        // })
+        // authAPI.getLoginUsers().then(response => {
+        //     if (response.data.resultCode === 0){
+        //         let {id, email, login} = response.data.data;
+        //         this.props.setAuthUserData( id, email, login);
+        //     }
+        // })
+        this.props.getAuthUserDataThunk()
     }
 
     render() {
@@ -39,4 +47,4 @@ const mapStateToProps = (state: AppStateType2) => {
 
     )
 }
-export default connect(mapStateToProps, {setAuthUserData})(HeaderContainer);
+export default connect(mapStateToProps, {getAuthUserDataThunk})(HeaderContainer);
