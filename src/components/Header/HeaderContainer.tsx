@@ -13,21 +13,21 @@ class HeaderContainer extends React.Component <any,any>{
         //     withCredentials: true
         // }).then(response => {
         //     if (response.data.resultCode === 0){
-        //         let {id, email, login} = response.data.data;
-        //         this.props.setAuthUserData( id, email, login);
+        //         let {id, email, Login} = response.data.data;
+        //         this.props.setAuthUserData( id, email, Login);
         //     }
         // });
 
         // authAPI.getLoginUsers().then(data => {
         //     if (data.resultCode === 0){
-        //                 let {id, email, login} = data.data;
-        //                 this.props.setAuthUserData( id, email, login);
+        //                 let {id, email, Login} = data.data;
+        //                 this.props.setAuthUserData( id, email, Login);
         //             }
         // })
         // authAPI.getLoginUsers().then(response => {
         //     if (response.data.resultCode === 0){
-        //         let {id, email, login} = response.data.data;
-        //         this.props.setAuthUserData( id, email, login);
+        //         let {id, email, Login} = response.data.data;
+        //         this.props.setAuthUserData( id, email, Login);
         //     }
         // })
         this.props.getAuthUserDataThunk()

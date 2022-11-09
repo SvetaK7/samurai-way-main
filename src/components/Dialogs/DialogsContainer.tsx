@@ -23,7 +23,8 @@ import {AppStateType2} from "../../redux/redux-store";
 
 const mapStateToProps = (state: AppStateType2) => {
     return{
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch: any) => {
