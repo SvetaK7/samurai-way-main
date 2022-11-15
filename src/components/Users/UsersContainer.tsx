@@ -14,6 +14,8 @@ import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {usersAPI} from "../../api/api";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export class UsersContainer extends React.Component<any, any> {
 
@@ -92,8 +94,14 @@ const mapStateToProps = (state: AppStateType2) => {
 //     }
 // }
 
-export default connect(mapStateToProps, {
+// export default connect(mapStateToProps, {
+//     follow, unfollow, setUsers,
+//     setCurrentPage, setTotalUsersCount, toggleIsFetching,
+//     toggleFollowingProgress, getUsersThunk, followThunk, unfollowThunk
+// })(UsersContainer);
+
+export default compose<React.ComponentType>(withAuthRedirect,connect(mapStateToProps, {
     follow, unfollow, setUsers,
     setCurrentPage, setTotalUsersCount, toggleIsFetching,
     toggleFollowingProgress, getUsersThunk, followThunk, unfollowThunk
-})(UsersContainer);
+}))(UsersContainer)
