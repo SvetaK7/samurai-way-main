@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
+import {updateStatusThunk} from "../../../redux/profile-reducer";
 
 export class ProfileStatus extends React.Component<any, any> {
+    // statusInputRef: React.RefObject<HTMLInputElement>
+    // statusInputRef: React.RefObject<HTMLInputElement> = React.createRef()
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -14,6 +18,13 @@ export class ProfileStatus extends React.Component<any, any> {
     deactivateEditMode = () => {
         this.setState({
             editMode: false
+        });
+        this.props.updateStatusThunk(this.state.status);
+    }
+
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
         })
     }
 
@@ -23,12 +34,12 @@ export class ProfileStatus extends React.Component<any, any> {
             <div>
                 {!this.state.editMode &&
                     <div>
-                        <span onDoubleClick={this.activateEditMode}> {this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}> {this.props.status || 'No status'}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status}/>
+                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.status}/>
                     </div>
                 }
             </div>

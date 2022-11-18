@@ -4,8 +4,10 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {Redirect} from "react-router-dom";
 import {ProfilePageType} from "../../redux/state";
 
-type ProfileT = {
+export type ProfileT = {
     profile: ProfilePageType
+    status: string
+    updateStatusThunk: any
 
 }
 
@@ -13,7 +15,7 @@ const Profile = (props: ProfileT) => {
 
       return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatusThunk={props.updateStatusThunk}/>
             <MyPostsContainer/>
         </div>
     );

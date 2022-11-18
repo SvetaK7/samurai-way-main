@@ -168,12 +168,17 @@ type setUserData = {
         login: string
         isAuth: boolean
     }
-
 }
+
+type setStatus = {
+    type: 'SET_STATUS'
+    status: string
+}
+
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
     | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
-    | setUserProfile | setUserData;
+    | setUserProfile | setUserData | setStatus;
 
 
 
