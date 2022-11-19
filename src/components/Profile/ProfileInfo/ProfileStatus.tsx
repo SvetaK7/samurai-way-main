@@ -1,10 +1,16 @@
 import React, {ChangeEvent} from 'react'
 import {updateStatusThunk} from "../../../redux/profile-reducer";
 
+type StateType = {
+    editMode: boolean
+    status: string
+}
+
 export class ProfileStatus extends React.Component<any, any> {
     // statusInputRef: React.RefObject<HTMLInputElement>
     // statusInputRef: React.RefObject<HTMLInputElement> = React.createRef()
-    state = {
+
+    state: StateType = {
         editMode: false,
         status: this.props.status
     }
@@ -26,6 +32,14 @@ export class ProfileStatus extends React.Component<any, any> {
         this.setState({
             status: e.currentTarget.value
         })
+    }
+
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<StateType>) {
+        if (prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
