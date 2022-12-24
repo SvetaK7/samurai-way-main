@@ -24,7 +24,7 @@ export type FriendType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string | undefined
+    newPostText: string
 }
 
 export type DialogItemType = {
@@ -52,7 +52,7 @@ export type PostType = {
 
 export type PostsType = {
     posts: Array<PostType>
-    newPostText: string | undefined
+    newPostText: string
 }
 
 export type TProfilePage = {
@@ -115,13 +115,15 @@ export type UserType = {
 
 type AddPostActionType = {
     type: 'ADD-POST'
+    newPostText: string
 }
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+// type UpdateNewPostTextActionType = {
+//     type: 'UPDATE-NEW-POST-TEXT'
+//     newText: string
+// }
 type AddMessageActionType = {
     type: 'ADD-MESSAGE'
+    newMessageText: string
 }
 type UpdateNewMessageTextActionType = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
@@ -175,7 +177,7 @@ type setStatus = {
     status: string
 }
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType
+export type ActionsTypes = AddPostActionType |  AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
     | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
     | setUserProfile | setUserData | setStatus;

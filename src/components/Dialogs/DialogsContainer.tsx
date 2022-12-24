@@ -1,6 +1,6 @@
 import React, {ChangeEvent, RefObject} from 'react';
 import {StateType, TDialogsPage} from "../../redux/state";
-import {AddMessageActionCreator, UpdateNewMessageText} from "../../redux/dialogs-reducer";
+import {AddMessageActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType2} from "../../redux/redux-store";
@@ -34,11 +34,11 @@ const mapStateToProps = (state: AppStateType2) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        updateNewMessageText: (text: string) => {
-            dispatch(UpdateNewMessageText(text));
-        },
-        addMessage: () => {
-            dispatch(AddMessageActionCreator());
+        // updateNewMessageText: (text: string) => {
+        //     dispatch(UpdateNewMessageText(text));
+        // },
+        addMessage: (newMessageText: string) => {
+            dispatch(AddMessageActionCreator(newMessageText));
         }
     }
 }

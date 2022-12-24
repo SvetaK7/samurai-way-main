@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -28,9 +28,9 @@ const initialState = {
             title: "https://images.ua.prom.st/441474411_w640_h640_vinilovaya-naklejka-sajmon.jpg"
         }
     ],
-    newPostText: '',
     profile: null,
-    status: ''
+    status: '',
+    newPostText: ''
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes) => {
@@ -39,13 +39,13 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
         case ADD_POST:
             const newPost = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0,
                 title: "https://coolsen.ru/wp-content/uploads/2021/01/image051-45.jpg"
             };
             return {...state, posts: [...state.posts, newPost], newPostText: ''};
-        case UPDATE_NEW_POST_TEXT:
-            return {...state, newPostText: action.newText};
+        // case UPDATE_NEW_POST_TEXT:
+        //     return {...state, newPostText: action.newText};
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
@@ -58,7 +58,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
+export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText})
 export const setUserProfile = (profile: ProfilePageType) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status: string) => ({type: SET_STATUS, status})
 
@@ -84,8 +84,8 @@ export const updateStatusThunk = (status: string) => (dispatch: Dispatch) => {
         });
 }
 
-export const updateNewPostTextActionCreator = (text: string | undefined) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT, newText: text
-    }
-}
+// export const updateNewPostTextActionCreator = (text: string | undefined) => {
+//     return {
+//         type: UPDATE_NEW_POST_TEXT, newText: text
+//     }
+// }

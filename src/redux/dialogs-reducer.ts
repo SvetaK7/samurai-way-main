@@ -1,7 +1,7 @@
 import {ActionsTypes, DialogsPage} from "./state";
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 const initialState = {
     dialogsData: [
@@ -20,8 +20,7 @@ const initialState = {
         {id: 4, message: 'I am happy'},
         {id: 5, message: 'You are welcome'},
         {id: 6, message: 'I am cooking pizza today'}
-    ],
-    newMessageText: ''
+    ]
 }
 
 export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
@@ -30,21 +29,21 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
         case ADD_MESSAGE:
             const newMessage = {
                 id: 7,
-                message: state.newMessageText
+                message: action.newMessageText
             }
             return  {...state,
                 messagesData : [...state.messagesData, newMessage],
-                newMessageText : ''};
-
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return  {...state, newMessageText : action.newMessage};
+                };
+        //
+        // case UPDATE_NEW_MESSAGE_TEXT:
+        //     return  {...state, newMessageText : action.newMessage};
         default: return state;
     }
 }
 
-export const AddMessageActionCreator = () => ({ type: ADD_MESSAGE })
-export const UpdateNewMessageText = (text: string | undefined) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text
-    }
-}
+export const AddMessageActionCreator = (newMessageText: string) => ({ type: ADD_MESSAGE, newMessageText })
+// export const UpdateNewMessageText = (text: string | undefined) => {
+//     return {
+//         type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text
+//     }
+// }
