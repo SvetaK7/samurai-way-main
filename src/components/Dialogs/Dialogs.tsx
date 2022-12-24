@@ -1,10 +1,11 @@
-import React, {ChangeEvent, RefObject} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogsPage, TDialogsPage} from "../../redux/state";
-import {Redirect} from "react-router-dom";
+import {DialogsPage} from "../../redux/state";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {FormControl} from "../common/FormsControls/FormsControls";
+import {maxLenghtCreator, required} from "../../utils/validators/validators";
 
 type DialogsNewType = {
     updateNewMessageText: (text: string) => void
@@ -54,11 +55,16 @@ const Dialogs = (props: DialogsNewType) => {
 //     NewMessageBody: string
 // }
 
+const maxLenghtCreator100 =  maxLenghtCreator(100)
 const AddMessageForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={'textarea'} name={'newMessageText'} placeholder={'Enter your message'}/>
+                <Field component={FormControl}
+                       elementType={'textarea'}
+                       name={'newMessageText'}
+                       placeholder={'Enter your message'}
+                       validate={[required, maxLenghtCreator100]}/>
                 {/*<textarea*/}
                 {/*onChange={onMessageChange}*/}
                 {/*value={state.newMessageText}></textarea>*/}

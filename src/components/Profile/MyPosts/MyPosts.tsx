@@ -1,9 +1,10 @@
 import React, {RefObject} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType, TProfilePage} from "../../../redux/state";
-import {addPostActionCreator} from "../../../redux/profile-reducer";
+import {PostType} from "../../../redux/state";
 import {Field, reduxForm} from "redux-form";
+import {maxLenghtCreator, required} from "../../../utils/validators/validators";
+import {FormControl} from "../../common/FormsControls/FormsControls";
 
 type MyPostsType = {
     addPost: (values: string) => void
@@ -19,7 +20,6 @@ const MyPosts = (props: MyPostsType) => {
 
     let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
     const onAddPost = (values: any) => {
-        alert(values.newPostText)
         props.addPost(values.newPostText);
         // if (newPostElement.current?.value != undefined) {
         //     newPostElement.current.value = '';
@@ -56,11 +56,17 @@ const MyPosts = (props: MyPostsType) => {
     );
 }
 
+const maxLenghtCreator10 =  maxLenghtCreator(10)
+
 const AddNewPostForm = (props: any) => {
     return (
     <form onSubmit={props.handleSubmit}>
         <div>
-            <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your message'}/>
+            <Field component={FormControl}
+                   elementType={'textarea'}
+                   name={'newPostText'}
+                   placeholder={'Enter your message'}
+                   validate={[required, maxLenghtCreator10]}/>
         </div>
         <div>
             <button>Add post</button>
