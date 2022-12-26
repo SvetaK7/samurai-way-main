@@ -9,3 +9,8 @@
 .errorMessage{
     color: red;
 }
+
+.formControlError{
+    padding: 5px;
+    color: #a70d23;
+}
