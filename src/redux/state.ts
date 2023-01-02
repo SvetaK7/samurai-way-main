@@ -176,11 +176,14 @@ type setStatus = {
     type: 'SET_STATUS'
     status: string
 }
+type InitializedSuccessType = {
+    type: 'INITIALIZED_SUCCESS'
+}
 
 export type ActionsTypes = AddPostActionType |  AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
     | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
-    | setUserProfile | setUserData | setStatus;
+    | setUserProfile | setUserData | setStatus | InitializedSuccessType;
 
 
 

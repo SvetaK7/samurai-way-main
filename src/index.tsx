@@ -19,7 +19,8 @@ import {StateType, StoreType} from "./redux/state";
 //
 // store.subscribe(renderEntireTree);
 // const renderEntireTree = (state: StateType) => {
-    ReactDOM.render(
+// @ts-ignore
+ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
                 <App />

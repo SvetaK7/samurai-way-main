@@ -100,7 +100,7 @@ const mapStateToProps = (state: AppStateType2) => {
 //     toggleFollowingProgress, getUsersThunk, followThunk, unfollowThunk
 // })(UsersContainer);
 
-export default compose<React.ComponentType>(withAuthRedirect,connect(mapStateToProps, {
+export default compose<React.ComponentType>(connect(mapStateToProps, {
     follow, unfollow, setUsers,
     setCurrentPage, setTotalUsersCount, toggleIsFetching,
     toggleFollowingProgress, getUsersThunk, followThunk, unfollowThunk

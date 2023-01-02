@@ -18,6 +18,9 @@ class ProfileContainer extends React.Component<any, any>{
         console.log(userId)
         if (!userId){
             userId = this.props.authorizedUserId;
+            if (!userId){
+                this.props.history.push('/login')
+            }
         }
         this.props.getUserProfileThunk(userId);
         this.props.getStatusThunk(userId);
@@ -28,7 +31,10 @@ class ProfileContainer extends React.Component<any, any>{
 
     render(){
         return (
-           <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatusThunk={this.props.updateStatusThunk} />
+           <Profile {...this.props}
+                    profile={this.props.profile}
+                    status={this.props.status}
+                    updateStatusThunk={this.props.updateStatusThunk} />
         );
     }
 }
