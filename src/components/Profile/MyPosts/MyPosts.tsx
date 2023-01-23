@@ -14,8 +14,9 @@ type MyPostsType = {
 }
 
 const MyPosts = (props: MyPostsType) => {
+    console.log('RENDER POSTS')
 
-    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}
+    let postsElements = [...props.posts].reverse().map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}
                                                    title={p.title}/>)
 
     let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();

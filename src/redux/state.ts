@@ -179,11 +179,15 @@ type setStatus = {
 type InitializedSuccessType = {
     type: 'INITIALIZED_SUCCESS'
 }
+type DeletePostType = {
+    type: 'DELETE_POST'
+    postId: number
+}
 
 export type ActionsTypes = AddPostActionType |  AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
     | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
-    | setUserProfile | setUserData | setStatus | InitializedSuccessType;
+    | setUserProfile | setUserData | setStatus | InitializedSuccessType | DeletePostType;
 
 
 
