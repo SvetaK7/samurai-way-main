@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -13,6 +13,7 @@ type DialogsNewType = {
     dialogsPage: DialogsPage;
     isAuth: boolean
 }
+
 
 const Dialogs = (props: DialogsNewType) => {
     const state = props.dialogsPage

@@ -163,7 +163,7 @@ type setUserProfile = {
     profile: any
 }
 type setUserData = {
-    type: 'SET_USER_DATA'
+    type: 'AUTH/SET_USER_DATA'
     payload: {
         id: number
         email: string

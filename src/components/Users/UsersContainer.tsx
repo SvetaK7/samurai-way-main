@@ -24,24 +24,13 @@ import {
 export class UsersContainer extends React.Component<any, any> {
 
     componentDidMount() {
-        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
-        // this.props.toggleIsFetching(true);
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-        //     this.props.toggleIsFetching(false);
-        //     this.props.setUsers(data.items)
-        //     this.props.setTotalUsersCount(data.totalCount)
-        // });
+        const {currentPage, pageSize} = this.props  //destructurization props
+        this.props.getUsersThunk(currentPage,pageSize)
     }
 
     onPageChanged(pageNumber: number) {
-        // this.props.setCurrentPage(pageNumber);
-        this.props.getUsersThunk(pageNumber, this.props.pageSize)
-        //
-        // this.props.toggleIsFetching(true);
-        // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-        //     this.props.toggleIsFetching(false);
-        //     this.props.setUsers(data.items)
-        // });
+        const {pageSize} = this.props;
+        this.props.getUsersThunk(pageNumber, pageSize)
     }
 
     render() {
