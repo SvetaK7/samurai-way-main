@@ -6,6 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import { store } from './redux/redux-store';
 import {Provider} from "react-redux";
 import {StateType, StoreType} from "./redux/state";
+import SamuraiApp from "./App";
 
 
    /* ReactDOM.render(
@@ -20,14 +21,7 @@ import {StateType, StoreType} from "./redux/state";
 // store.subscribe(renderEntireTree);
 // const renderEntireTree = (state: StateType) => {
 // @ts-ignore
-ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App />
-            </Provider>
-
-        </BrowserRouter>, document.getElementById('root')
-    );
+ReactDOM.render(<SamuraiApp />, document.getElementById('root'));
 // }
 
 
