@@ -1,8 +1,5 @@
 import React from 'react'
-import s from "./Users.module.css";
 import {UserType} from "../../redux/state";
-import userPhoto from "../../assets/img/profile.png";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User";
 
