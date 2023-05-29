@@ -25,6 +25,7 @@ export type FriendType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    photos: PhotoSizeType
 }
 
 export type DialogItemType = {
@@ -183,11 +184,15 @@ type DeletePostType = {
     type: 'DELETE_POST'
     postId: number
 }
+type SavePhotoType = {
+    type: 'SAVE_PHOTO_SUCCESS'
+    photos: PhotoSizeType
+}
 
 export type ActionsTypes = AddPostActionType |  AddMessageActionType
     | UpdateNewMessageTextActionType | FollowACType | UnFollowACType | SetUsersACType
     | SetCurrentPageACType | SetTotalUsersCountACType | ToggleIsFetchingACType | ToggleFollowingProgressACType
-    | setUserProfile | setUserData | setStatus | InitializedSuccessType | DeletePostType;
+    | setUserProfile | setUserData | setStatus | InitializedSuccessType | DeletePostType | SavePhotoType;
 
 
 

@@ -5,20 +5,28 @@ import {Redirect} from "react-router-dom";
 import {ProfilePageType} from "../../redux/state";
 
 export type ProfileT = {
-    profile: ProfilePageType
-    status: string
-    updateStatusThunk: any
+  profile: ProfilePageType
+  status: string
+  updateStatusThunk: any
+  isOwner: boolean
+  savePhoto: (file: File) => void
 
 }
 
 const Profile = (props: ProfileT) => {
 
-      return (
-        <div>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatusThunk={props.updateStatusThunk}/>
-            <MyPostsContainer/>
-        </div>
-    );
+  return (
+    <div>
+      <ProfileInfo
+        savePhoto={props.savePhoto}
+        isOwner={props.isOwner}
+        profile={props.profile}
+        status={props.status}
+        updateStatusThunk={props.updateStatusThunk}
+      />
+      <MyPostsContainer/>
+    </div>
+  );
 }
 
 export default Profile;

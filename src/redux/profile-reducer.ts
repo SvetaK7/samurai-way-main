@@ -1,12 +1,15 @@
-import {ActionsTypes, ProfilePageType} from "./state";
+import {ActionsTypes, PhotoSizeType, ProfilePageType} from "./state";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import dialogs from "components/Dialogs/Dialogs";
+import profile from "components/Profile/Profile";
 
 const ADD_POST = 'ADD-POST';
 // const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 
 const initialState = {
     posts: [
@@ -29,13 +32,13 @@ const initialState = {
             title: "https://images.ua.prom.st/441474411_w640_h640_vinilovaya-naklejka-sajmon.jpg"
         }
     ],
-    profile: null,
+    profile: {},
     status: '',
     newPostText: ''
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes) => {
-
+    console.log(action);
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -55,7 +58,8 @@ export const profileReducer = (state = initialState, action: ActionsTypes) => {
         }
         case DELETE_POST:
             return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
-
+        case SAVE_PHOTO_SUCCESS:
+            return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state;
     }
@@ -65,6 +69,7 @@ export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, n
 export const setUserProfile = (profile: ProfilePageType) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status: string) => ({type: SET_STATUS, status})
 export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST, postId})
+export const savePhotoSuccess = (photos: string) => ({type: SAVE_PHOTO_SUCCESS, photos})
 
 export const getUserProfileThunk = (userId: number) => async (dispatch: Dispatch) => {
     const response = await usersAPI.getProfile(userId)
@@ -80,6 +85,13 @@ export const updateStatusThunk = (status: string) => async (dispatch: Dispatch) 
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
+    }
+}
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
+const response = await profileAPI.savePhoto(file)
+    console.log(response)
+    if (response.data.resultCode === 0){
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 
