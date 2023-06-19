@@ -26,6 +26,22 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     photos: PhotoSizeType
+
+    lookingForAJob: boolean
+    aboutMe: string
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: any
+}
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
 
 export type DialogItemType = {
