@@ -5,7 +5,7 @@ import {ProfileT} from "../Profile";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/img/profile.png"
 import {ProfilePageType} from "redux/state";
-import {ProfileDataForm} from "components/Profile/ProfileInfo/ProfileDataForm";
+import {ProfileDataFormReduxForm} from "components/Profile/ProfileInfo/ProfileDataForm";
 
 export type ProfileData = {
   profile: ProfilePageType
@@ -31,7 +31,7 @@ const ProfileInfo = (props: ProfileT) => {
       <img src={props.profile.photos?.large || userPhoto} className={s.mainPhoto}/>
       {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
       {editMode
-        ? <ProfileDataForm profile={props.profile}/>
+        ? <ProfileDataFormReduxForm/>
         : <ProfileData profile={props.profile} isOwner={props.isOwner} goToEditMode={() => setEditMode(true)}/>}
       <ProfileStatusWithHooks status={props.status} updateStatusThunk={props.updateStatusThunk}/>
     </div>
